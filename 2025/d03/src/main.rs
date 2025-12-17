@@ -1,15 +1,17 @@
 const INPUT: &str = include_str!("../day03.txt");
 
-fn max_joltage(bank: &str) -> i32 {
+fn max_joltage(bank: &str) -> u64 {
+    // collect char as u8 digits in a vector
     let digits: Vec<u8> = bank
         .chars()
         .filter_map(|c| c.to_digit(10).map(|d| d as u8))
         .collect();
 
+    // try building the biggest 2 figure number
     let mut max_val = 0;
     for i in 0..digits.len() {
         for j in i + 1..digits.len() {
-            let val = 10 * digits[i] as i32 + digits[j] as i32;
+            let val = 10 * digits[i] as u64 + digits[j] as u64;
             if val > max_val {
                 max_val = val;
             }
@@ -57,11 +59,13 @@ fn max_joltage_12(bank: &str) -> u64 {
 }
 
 fn main() {
-    let mut sum_joltage: u64 = 0;
+    let mut sum1: u64 = 0;
+    let mut sum2: u64 = 0;
 
     for bank in INPUT.lines() {
-        sum_joltage += max_joltage_12(bank);
+        sum1 += max_joltage(bank);
+        sum2 += max_joltage_12(bank);
 
     }
-    println!("MAX SUM JOLT: {}", sum_joltage);
+    println!("sum1: {} sum2: {}", sum1, sum2);
 }
