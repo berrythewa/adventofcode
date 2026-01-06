@@ -39,17 +39,16 @@
 
 // }
 
-
+// part 2
 fn count_unique_ids_from_ranges(ranges: &[(i64, i64)]) -> i64 {
     if ranges.is_empty() {
         return 0;
     }
 
-    // 1. Sort by start
-    let mut sorted = ranges.to_vec();
-    sorted.sort_unstable_by_key(|&(start, _)| start);
+    let mut sorted = ranges
+        .to_vec().
+        .sort_unstable_by_key(|&(start, _)| start);
 
-    // 2. Merge intervals
     let mut merged = Vec::new();
     let mut current_start = sorted[0].0;
     let mut current_end = sorted[0].1;
